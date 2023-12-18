@@ -1,0 +1,53 @@
+.item-container {
+  max-width: 40.8rem;
+}
+
+.blog-details {
+  padding: 1.5rem 0.5rem;
+}
+
+.blog-author-date {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-date {
+  color: #85858D;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.blog-author {
+  color: #1A1A1F;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.blog-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2rem 0;
+}
+
+.blog-description {
+  color: #404049;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 1rem 0;
+}
+
+.show-more-btn {
+  cursor: pointer;
+  color: #5D37F3;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.show-more-btn::after {
+  content: url('/assets/imgs/arrow.png');
+  margin-left: 5px;
+  width: 8rem;
+}

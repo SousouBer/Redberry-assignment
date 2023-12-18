@@ -1,4 +1,10 @@
-
+.blogs-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
 
 .title-and-logo {
   display: flex;
@@ -17,6 +23,8 @@
   align-items: center;
   justify-content: center;
   gap: 5rem;
+  padding: 1rem;
+  margin: 5rem 0;
 }
 
 .categories-container button {
