@@ -1,0 +1,27 @@
+.header {
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 9rem;
+}
+
+.logo-container {
+  width: 20rem;
+}
+
+.redberry-logo {
+  width: 100%;
+}
+
+.login-button {
+  background-color: #5D37F3;
+  color: #fff;
+  font-weight: 500;
+  font-size: 2.5rem;
+  font-family: inherit;
+  padding: 2rem 2.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 13px;
+}

@@ -1,0 +1,31 @@
+
+
+.title-and-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5rem 10rem;
+}
+
+.title {
+  font-size: 6.4rem;
+  font-weight: 700;
+}
+
+.categories-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.categories-container button {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 2rem;
+  border: none;
+}
+
+.market {
+  color: #D6961C;
+}
