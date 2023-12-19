@@ -5,13 +5,12 @@
       <img [src]="'/assets/imgs/main-page-logo.png'" alt="Main Logo">
     </div>
   </div>
-  <div class="categories-container">
-    <button class="market">მარკეტი</button>
-    <button class="application">აპლიკაცია</button>
-    <button class="artificial-intelligence">ხელოვნური ინტელექტი</button>
-    <button class="ui-ux">Ui/UX</button>
-    <button class="examination">კვლევა</button>
-    <button class="figma">Figma</button>
+  <div class="center-categories">
+    <div class="categories-container">
+      <ng-container *ngFor="let category of categories$ | async">
+        <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color + '50' }">{{ category.title }}</button>
+      </ng-container>
+    </div>
   </div>
   <div class="blogs-container">
     <app-blog-item></app-blog-item>

@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+  <div class="close-modal-container">
+    <img [src]="'assets/imgs/add.png'" alt="Add Logo" (click)="hideModal()">
+  </div>
+  <h3>შესვლა</h3>
+  <div class="email-input-container">
+    <label for="email">ელ-ფოსტა</label>
+    <input
+      class="email"
+      formControlName="email"
+      type="email"
+      id="email"
+      placeholder="Example@redberry.ge"
+    />
+    <div *ngIf="email?.errors?.['emailNotFound']" class="err-message-container">
+      <span class="err-message">ელ-ფოსტა არ მოიძებნა</span>
+    </div>
+  </div>
+  <button *ngIf="!isLoading" class="login-btn" type="submit">შესვლა</button>
+  <div *ngIf="isLoading" class="spinner-container">
+    <app-spinner></app-spinner>
+  </div>
+</form>

@@ -1,16 +1,10 @@
-<div class="login-form-container">
-  <form class="login-form">
-    <h3>შესვლა</h3>
-    <div class="email-input-container">
-      <label for="email">ელ-ფოსტა</label>
-      <input type="email" id="email" placeholder="Example@redberry.ge">
-    </div>
-    <button class="login-btn" type="submit">შესვლა</button>
-  </form>
+<div *ngIf="showOrHideModal$ | async" class="login-form-container">
+  <app-login *ngIf="!(authenticated$ | async)"></app-login>
+  <app-login-success *ngIf="authenticated$ | async"></app-login-success>
 </div>
 <header class="header">
   <div class="logo-container">
     <img class="redberry-logo" [src]="'assets/imgs/redberry-logo.png'" alt="Redberry Logo">
   </div>
-  <button class="login-button">შესვლა</button>
+  <button class="login-button" (click)="showModal()">შესვლა</button>
 </header>

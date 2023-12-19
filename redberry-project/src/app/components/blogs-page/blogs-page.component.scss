@@ -29,6 +29,7 @@
 
 .categories-container button {
   cursor: pointer;
+  white-space: nowrap;
   font-weight: 700;
   font-size: 2rem;
   border: none;
@@ -36,4 +37,41 @@
 
 .market {
   color: #D6961C;
+}
+
+.category-btn {
+  font-family: inherit;
+  padding: 1rem;
+  border-radius: 13px;
+}
+
+.center-categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categories-container {
+  width: 60%;
+  overflow-x: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 50px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
