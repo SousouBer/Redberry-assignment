@@ -20,7 +20,7 @@ export class BlogsPageComponent implements OnInit {
   ngOnInit(): void {
     this.categories$ = this.blogsService.getCategories();
 
-    this.categories$.subscribe(val => console.log(val));
+    // this.categories$.subscribe(val => console.log(val));
 
     this.blogsService.init();
 

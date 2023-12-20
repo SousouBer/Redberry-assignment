@@ -1,0 +1,67 @@
+<section class="blog-section">
+  <form class="blog-section-container">
+    <h1 class="section-heading">ბლოგის დამატება</h1>
+    <!-- <div class="upload-photo-section">
+      <span class="upload-photo-title">ატვირთეთ ფოტო</span>
+      <div class="upload-photo-container" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+        <div class="logo-container">
+          <img [src]="'assets/imgs/folder-add.png'" alt="Folder add logo">
+        </div>
+        <input type="file" #fileDrop id="photo-input" class="input" hidden>
+        <span>დააგდეთ ფაილი ან<label for="photo-input">აირჩიეთ ფაილი</label> </span>
+      </div>
+    </div> -->
+    <div class="uploaded-photo-container">
+      <div class="logo-title-container">
+        <div class="logo-container">
+          <img [src]="'assets/imgs/gallery.png'" alt="Gallery icon">
+        </div>
+        <span class="img-name">image.png</span>
+      </div>
+      <div class="close-btn-container">
+        <img [src]="'assets/imgs/add.png'" alt="Remove Image Logo">
+      </div>
+    </div>
+    <div class="author-title-container">
+      <div class="author-input">
+        <label class="label-title required" for="author">ავტორი</label>
+        <input type="text" id="author" placeholder="შეიყვანეთ ავტორი">
+      </div>
+      <div class="title-input">
+        <label class="label-title required" for="title">სათაური</label>
+        <input type="text" id="title" placeholder="შეიყვანე სათაური">
+      </div>
+    </div>
+    <div class="description-input">
+      <label class="label-title required" for="description">აღწერა</label>
+      <textarea class="textarea" name="description" id="description" placeholder="შეიყვანეთ აღწერა"></textarea>
+    </div>
+    <div class="author-title-container">
+      <div class="author-input">
+        <label class="label-title required" for="author">შეიყვანეთ თარიღი</label>
+        <input type="date" id="author" placeholder="შეიყვანეთ თარიღი">
+      </div>
+      <div class="title-input">
+        <label class="label-title required" for="title">კატეგორია</label>
+        <div class="categories-input">
+          <!-- Additional Div container to exanble horizontal scrolling. -->
+          <div class="create-sctoller">
+            <div class="chosen-categories">
+              <ng-container *ngFor="let category of categories$ | async">
+                <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
+              </ng-container>
+            </div>
+          </div>
+          <div class="show-hide-categories">
+            <img [src]="'assets/imgs/arrow-down.png'" alt="Arror Down">
+          </div>
+        </div>
+        <div class="categories">
+          <ng-container *ngFor="let category of categories$ | async">
+            <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
