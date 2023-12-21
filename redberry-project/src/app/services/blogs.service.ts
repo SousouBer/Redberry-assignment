@@ -29,6 +29,13 @@ export class BlogsService {
   // Subject that hold the data of the categories.
   private categories$ = new BehaviorSubject<Category[]>([]);
 
+  // Subject for holding selected categories in the blog page.
+  selectedCategories$ = new BehaviorSubject<Category[]>([]);
+
+  returnSelectedCategories(): Observable<Category[]> {
+    return this.selectedCategories$;
+  }
+
   // Subject that hold the data of the blogs;
   private blogs$ = new BehaviorSubject<Blog[]>([]);
 

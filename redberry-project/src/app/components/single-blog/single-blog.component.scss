@@ -134,13 +134,18 @@ input:focus,
 
 .categories-input {
   width: 28.8rem;
-  padding: 1rem 1rem 0 1rem;
+  padding: 1rem;
   border-radius: 12px;
   background-color: #fcfcfd;
   min-width: 28.8rem;
   border: 1px solid #e4e3eb;
   display: flex;
   overflow-y: auto;
+}
+
+.categories-input:focus {
+  border: 1px solid #5D37F3;
+  background-color: #F7F7FF;
 }
 
 .show-hide-categories {
@@ -163,14 +168,19 @@ button {
   display: flex;
   gap: 0.8rem;
   margin-bottom: 0.5rem;
+  width: 24.6rem;
 }
 
 .create-sctoller {
-  // overflow: hidden;
   overflow-x: auto;
 }
 
 .categories {
+  position: absolute;
+  width: 28.8rem;
+  bottom: 0;
+  right: 0;
+  transform: translateY(100%);
   padding: 1rem;
   display: flex;
   gap: 0.5rem;
@@ -183,7 +193,7 @@ button {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 5px;
+  height: 2px;
 }
 
 /* Track */
@@ -199,4 +209,40 @@ button {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.thiss {
+  position: relative;
+}
+
+.category-div-valid {
+  border: 1.5px solid #14D81C;
+  background-color: #F8FFF8;
+}
+
+.category-div-focused {
+  background-color: #F7F7FF;
+  border: 1.5px solid #5D37F3;
+}
+
+.category-btn {
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 1.2rem;
+  border: none;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.delete-icon-container {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.delete-icon-container img {
+  width: 100%;
+  cursor: pointer;
 }

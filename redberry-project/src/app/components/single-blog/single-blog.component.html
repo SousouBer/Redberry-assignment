@@ -36,31 +36,41 @@
       <label class="label-title required" for="description">აღწერა</label>
       <textarea class="textarea" name="description" id="description" placeholder="შეიყვანეთ აღწერა"></textarea>
     </div>
-    <div class="author-title-container">
+    <div class="author-title-container thiss">
       <div class="author-input">
         <label class="label-title required" for="author">შეიყვანეთ თარიღი</label>
         <input type="date" id="author" placeholder="შეიყვანეთ თარიღი">
       </div>
       <div class="title-input">
         <label class="label-title required" for="title">კატეგორია</label>
-        <div class="categories-input">
-          <!-- Additional Div container to exanble horizontal scrolling. -->
+        <div class="categories-input" [class.category-div-valid]="(selectedCategories$ | async)?.length" [class.category-div-focused]="isShown">
+          <!-- Additional Div container to enable horizontal scrolling. -->
           <div class="create-sctoller">
-            <div class="chosen-categories">
-              <ng-container *ngFor="let category of categories$ | async">
-                <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
+            <div formControlArray="categories" class="chosen-categories">
+              <ng-container *ngFor="let category of selectedCategories$ | async; let i = index">
+                <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">
+                  <span>{{ category.title }}</span>
+                  <div class="delete-icon-container">
+                    <img [src]="'assets/imgs/add-white.png'" (click)="onRemoveCategory(i, category.id)" alt="Remove icon">
+                  </div>
+                </div>
               </ng-container>
             </div>
           </div>
           <div class="show-hide-categories">
-            <img [src]="'assets/imgs/arrow-down.png'" alt="Arror Down">
+            <img [src]="'assets/imgs/arrow-down.png'" alt="Arror Down" (click)="showOrHideCategories()">
+          </div>
+          <div *ngIf="isShown" class="categories">
+            <ng-container *ngFor="let category of categories$ | async">
+              <button type="button" (click)="addCategory(category.id)" class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
+            </ng-container>
           </div>
         </div>
-        <div class="categories">
+        <!-- <div *ngIf="isShown" class="categories">
           <ng-container *ngFor="let category of categories$ | async">
             <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
           </ng-container>
-        </div>
+        </div> -->
       </div>
     </div>
   </form>
