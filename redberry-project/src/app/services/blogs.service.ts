@@ -65,7 +65,7 @@ export class BlogsService {
   }
 
   loadBlogs() {
-    return this.http
+    this.http
       .get<BlogsData>(`${this.APIurl}/blogs`)
       .pipe(map((data) => data.data))
       .subscribe((blogs) => this.blogs$.next(blogs));

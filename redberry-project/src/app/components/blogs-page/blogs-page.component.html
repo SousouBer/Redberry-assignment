@@ -13,11 +13,25 @@
     </div>
   </div>
   <div class="blogs-container">
-    <app-blog-item></app-blog-item>
-    <app-blog-item></app-blog-item>
-    <app-blog-item></app-blog-item>
-    <app-blog-item></app-blog-item>
-    <app-blog-item></app-blog-item>
-    <app-blog-item></app-blog-item>
+    <div class="blogs">
+      <ng-container *ngFor="let blog of createdBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of createdBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of createdBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of createdBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of createdBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of createdBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+    </div>
   </div>
 </main>

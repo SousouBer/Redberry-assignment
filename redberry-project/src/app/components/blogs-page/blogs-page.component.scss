@@ -75,3 +75,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.blogs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  width: 128.8rem
+}

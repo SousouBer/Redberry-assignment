@@ -1,15 +1,19 @@
 <div class="item-container">
   <div class="img-container">
-    <img [src]="'assets/imgs/test.png'" alt="Blog Image">
+    <img [src]="blogItem.image" alt="Blog Image">
   </div>
   <div class="blog-details">
     <div class="blog-author-date">
-      <span class="blog-author">ნია გოქსაძე</span>
-      <span class="blog-date">02/11/23</span>
+      <span class="blog-author">{{ blogItem.author }}</span>
+      <span class="blog-date">{{ blogItem.publish_date | date:'shortDate' }}</span>
     </div>
-    <p class="blog-title">EOMM-ის მრჩეველთა საბჭოს ნინო ეგაძე შეუერთდა</p>
-    <div class="blog-categories"></div>
-    <p class="blog-description">6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი...</p>
+    <p class="blog-title">{{ blogItem.title }}</p>
+    <div class="blog-categories">
+      <ng-container *ngFor="let category of blogItem.categories">
+        <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</div>
+      </ng-container>
+    </div>
+    <p class="blog-description">{{ blogItem.description | shortenPipe }}</p>
     <a class="show-more-btn">სრულად ნახვა</a>
   </div>
 </div>

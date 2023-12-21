@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { dragAndDropDirective } from 'src/app/directives/dragAndDrop.directive';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/models.interface';
 import { Observable, take } from 'rxjs';
@@ -9,7 +8,7 @@ import { BlogsService } from 'src/app/services/blogs.service';
 @Component({
   selector: 'app-single-blog',
   standalone: true,
-  imports: [CommonModule, dragAndDropDirective, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './single-blog.component.html',
   styleUrls: ['./single-blog.component.scss']
 })
