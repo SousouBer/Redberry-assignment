@@ -27,7 +27,7 @@ export class BlogsPageComponent implements OnInit {
 
     // Get categories from the service and use Observable above to hold values.
     this.categories$ = this.blogsService.getCategories();
-    
+
     this.blogsService.init();
     this.blogsService.loadBlogs();
 

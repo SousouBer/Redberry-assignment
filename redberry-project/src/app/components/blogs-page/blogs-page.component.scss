@@ -1,3 +1,7 @@
+.blogs-section {
+  padding-bottom: 2rem;
+}
+
 .blogs-container {
   display: flex;
   align-items: center;
@@ -10,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5rem 10rem;
+  padding: 7rem 7rem 0 8rem;
 }
 
 .title {
@@ -21,8 +25,7 @@
 .categories-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5rem;
+  gap: 2rem;
   padding: 1rem;
   margin: 5rem 0;
 }
@@ -31,7 +34,7 @@
   cursor: pointer;
   white-space: nowrap;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.2rem;
   border: none;
 }
 
@@ -41,7 +44,7 @@
 
 .category-btn {
   font-family: inherit;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 13px;
 }
 
@@ -52,13 +55,14 @@
 }
 
 .categories-container {
-  width: 60%;
+  width: 68.4rem;
   overflow-x: auto;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 50px;
+  width: 20px;
+  height: 5px;
 }
 
 /* Track */
