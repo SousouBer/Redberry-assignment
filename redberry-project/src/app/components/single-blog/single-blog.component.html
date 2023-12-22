@@ -1,29 +1,81 @@
-<div class="item-container">
-  <div class="item">
-    <div class="img-container">
-      <img [src]="'assets/imgs/test-big-photo.png'" alt="Blog Image">
-    </div>
-    <div class="blog-details">
-      <div class="blog-author-date">
-        <span class="blog-author">ლილე კვარაცხელია</span>
-        <div class="date-email-container">
-          <span class="blog-date">11/10/2023</span>
-          <span class="blog-email">lile.kvaratskhelia@redberry.ge</span>
-        </div>
+<section class="blog-info-section">
+  <div class="item-container">
+    <div class="item">
+      <div class="img-container">
+        <img [src]="'assets/imgs/test-big-photo.png'" alt="Blog Image" />
       </div>
-      <p class="blog-title">მობილური ფოტოგრაფიის კონკურსის გამარჯვებულთა ვინაობა ცნობილია</p>
-      <div class="blog-categories">
-        <!-- <ng-container *ngFor="let category of blogItem.categories">
+      <div class="blog-details">
+        <div class="blog-author-date">
+          <span class="blog-author">ლილე კვარაცხელია</span>
+          <div class="date-email-container">
+            <span class="blog-date">11/10/2023</span>
+            <span class="blog-email">lile.kvaratskhelia@redberry.ge</span>
+          </div>
+        </div>
+        <p class="blog-title">
+          მობილური ფოტოგრაფიის კონკურსის გამარჯვებულთა ვინაობა ცნობილია
+        </p>
+        <div class="blog-categories">
+          <!-- <ng-container *ngFor="let category of blogItem.categories">
           <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</div>
         </ng-container> -->
-        <ng-container *ngFor="let category of categories$ | async">
-          <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</div>
-        </ng-container>
+          <ng-container *ngFor="let category of categories$ | async">
+            <div
+              class="category-btn"
+              [ngStyle]="{
+                color: category.text_color,
+                'background-color': category.background_color
+              }"
+            >
+              {{ category.title }}
+            </div>
+          </ng-container>
+        </div>
+        <p class="blog-description">
+          6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური
+          სიზუსტისთვის, ეს პროცესი ორჯერ გაიმეორეს და ორივეჯერ იმ ყველს მიენიჭა
+          უპირატესობა, რომელსაც ჰიპ-ჰოპს ასმენინებდნენ. „მუსიკალური ენერგია
+          პირდაპირ ყველის შუაგულში რეზონირებდა“, — აღნიშნა ბერნის ხელოვნების
+          უნივერსიტეტის წარმომადგენელმა, მაიკლ ჰერენბერგმა. რა თქმა უნდა, ეს
+          ერთი კვლევა საკმარისი არ არის საბოლოო დასკვნების გამოსატანად.
+          სანაცვლოდ, მეცნიერებს სურთ, უშუალოდ ჰიპ-ჰოპის ჟანრის სხვადასხვა მუსიკა
+          მოასმენინონ რამდენიმე ყველს და უკვე ისინი შეაჯიბრონ ერთმანეთს. აქვე
+          საგულისხმოა, რომ როგორც ბერნის მეცნიერები განმარტავენ, ექსპერიმენტს
+          საფუძვლად არა ყველის გაუმჯობესებული წარმოება, არამედ კულტურული
+          საკითხები დაედო. მათი თქმით, ადამიანებს უყვართ ყველი და მუსიკა,
+          ამიტომაც საინტერესოა ამ ორის კავშირის დანახვა. 6 თვის შემდეგ ყველის
+          ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი
+          ორჯერ გაიმეორეს და ორივეჯერ იმ ყველს მიენიჭა უპირატესობა, რომელსაც
+          ჰიპ-ჰოპს ასმენინებდნენ. „მუსიკალური ენერგია პირდაპირ ყველის შუაგულში
+          რეზონირებდა“, — აღნიშნა ბერნის ხელოვნების უნივერსიტეტის
+          წარმომადგენელმა, მაიკლ ჰერენბერგმა. რა თქმა უნდა, ეს ერთი კვლევა
+          საკმარისი არ არის საბოლოო დასკვნების გამოსატანად. სანაცვლოდ,
+          მეცნიერებს სურთ, უშუალოდ ჰიპ-ჰოპის ჟანრის სხვადასხვა მუსიკა
+          მოასმენინონ რამდენიმე ყველს და უკვე ისინი შეაჯიბრონ ერთმანეთს.
+        </p>
       </div>
-      <p class="blog-description">6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი ორჯერ გაიმეორეს და ორივეჯერ იმ ყველს მიენიჭა უპირატესობა, რომელსაც ჰიპ-ჰოპს ასმენინებდნენ. „მუსიკალური ენერგია პირდაპირ ყველის შუაგულში რეზონირებდა“, — აღნიშნა ბერნის ხელოვნების უნივერსიტეტის წარმომადგენელმა, მაიკლ ჰერენბერგმა.
-        რა თქმა უნდა, ეს ერთი კვლევა საკმარისი არ არის საბოლოო დასკვნების გამოსატანად. სანაცვლოდ, მეცნიერებს სურთ, უშუალოდ ჰიპ-ჰოპის ჟანრის სხვადასხვა მუსიკა მოასმენინონ რამდენიმე ყველს და უკვე ისინი შეაჯიბრონ ერთმანეთს.
-        აქვე საგულისხმოა, რომ როგორც ბერნის მეცნიერები განმარტავენ, ექსპერიმენტს საფუძვლად არა ყველის გაუმჯობესებული წარმოება, არამედ კულტურული საკითხები დაედო. მათი თქმით, ადამიანებს უყვართ ყველი და მუსიკა, ამიტომაც საინტერესოა ამ ორის კავშირის დანახვა. 6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი ორჯერ გაიმეორეს და ორივეჯერ იმ ყველს მიენიჭა უპირატესობა, რომელსაც ჰიპ-ჰოპს ასმენინებდნენ. „მუსიკალური ენერგია პირდაპირ ყველის შუაგულში რეზონირებდა“, — აღნიშნა ბერნის ხელოვნების უნივერსიტეტის წარმომადგენელმა, მაიკლ ჰერენბერგმა.
-        რა თქმა უნდა, ეს ერთი კვლევა საკმარისი არ არის საბოლოო დასკვნების გამოსატანად. სანაცვლოდ, მეცნიერებს სურთ, უშუალოდ ჰიპ-ჰოპის ჟანრის სხვადასხვა მუსიკა მოასმენინონ რამდენიმე ყველს და უკვე ისინი შეაჯიბრონ ერთმანეთს.</p>
     </div>
   </div>
-</div>
+  <div class="similar-blogs-section">
+    <div class="title-btns-container">
+      <h3>მსგავსი სტატიები</h3>
+      <div class="btns-container">
+        <button></button>
+        <button>
+          <img [src]="'assets/imgs/arrow-front.png'" alt="Arror photo">
+        </button>
+      </div>
+    </div>
+    <div class="blogs-container">
+      <ng-container *ngFor="let blog of allBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of allBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+      <ng-container *ngFor="let blog of allBlogs$ | async">
+        <app-blog-item [blogItem]="blog"></app-blog-item>
+      </ng-container>
+    </div>
+  </div>
+</section>
