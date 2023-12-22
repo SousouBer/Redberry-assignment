@@ -1,4 +1,5 @@
 .blog-info-section {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,11 +182,24 @@
   gap: 2rem;
 }
 
-
-.btns-container button {
+.btns-container button, .back-main-page  {
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
+}
+
+.back-main-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(200%, 100%);
+  border-radius: 2.4rem;
+  height: 4.4rem;
+  width: 4.4rem;
+  font-size: 3.2rem;
+  font-weight: 700;
+  background-color: #fff;
+  border: 2px solid #fff;
 }
