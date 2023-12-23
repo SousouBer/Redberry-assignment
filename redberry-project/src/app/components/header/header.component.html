@@ -1,5 +1,6 @@
 <div *ngIf="showOrHideModal$ | async" class="login-form-container">
-  <app-login *ngIf="!(authenticated$ | async)"></app-login>
+  <!-- <app-login *ngIf="!(authenticated$ | async)"></app-login> -->
+  <app-login></app-login>
   <app-login-success *ngIf="authenticated$ | async"></app-login-success>
 </div>
 <header class="header">

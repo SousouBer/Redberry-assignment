@@ -85,4 +85,9 @@ export class BlogsService {
       })
     );
   }
+
+  // Create a blog
+  createBlog(data: FormData) {
+    return this.http.post(`${this.APIurl}/blogs`, data);
+  }
 }
