@@ -26,15 +26,22 @@
       <div class="author-input">
         <label class="form-label label-title required" for="author">ავტორი</label>
         <input formControlName="author" type="text" id="author" placeholder="შეიყვანეთ ავტორი">
+        <ul class="author-validations">
+          <li [class.invalid]="author?.errors?.['minlength'] || author?.touched" [class.valid]="!author?.errors?.['minlength'] && author?.value?.length">მინიმუმ 4 სიმბოლო</li>
+          <li [class.invalid]="author?.errors?.['manyWords'] || author?.touched" [class.valid]="!author?.errors?.['manyWords'] && author?.value?.length">მინიმუმ ორი სიტყვა</li>
+          <li [class.invalid]="author?.errors?.['notGeorgianLetters'] || author?.touched" [class.valid]="!author?.errors?.['notGeorgianLetters'] && author?.value?.length">მხოლოდ ქართული სიმბოლოები</li>
+        </ul>
       </div>
       <div class="title-input">
         <label class="form-label label-title required" for="title">სათაური</label>
         <input formControlName="title" type="text" id="title" placeholder="შეიყვანე სათაური">
+        <span class="title-warning-message" [class.invalid]="title?.errors?.['minlength'] || title?.touched" [class.valid]="!title?.errors?.['minlength'] && title?.value?.length">მინიმუმ 4 სიმბოლო</span>
       </div>
     </div>
     <div class="description-input">
       <label class="form-label label-title required" for="description">აღწერა</label>
       <textarea formControlName="description" class="textarea" name="description" id="description" placeholder="შეიყვანეთ აღწერა"></textarea>
+      <span class="title-warning-message" [class.invalid]="description?.errors?.['minlength'] || description?.touched" [class.valid]="!description?.errors?.['minlength'] && description?.value?.length">მინიმუმ 4 სიმბოლო</span>
     </div>
     <div class="two-inputs-container thiss">
       <div class="author-input">
@@ -77,6 +84,6 @@
       <label class="form-label label-title required" for="email">შეიყვანეთ თარიღი</label>
       <input formControlName="email" type="text" id="email" placeholder="შეიყვანეთ იმეილი">
     </div>
-    <button type="submit">SUBMIT</button>
+    <button type="submit" [disabled]="!blogForm.valid">SUBMIT</button>
   </form>
 </section>

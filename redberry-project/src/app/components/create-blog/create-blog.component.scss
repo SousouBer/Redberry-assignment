@@ -39,7 +39,7 @@
 
 .upload-photo-container {
   margin-top: 0.5rem;
-  background-color: #F7F7FF;
+  background-color: #f7f7ff;
   width: 100%;
   height: 18rem;
   border-radius: 12px;
@@ -68,7 +68,7 @@
   background-color: #f2f2fa;
   border-radius: 12px;
   padding: 1.5rem;
-  border-radius: 1px solid #85858D;
+  border-radius: 1px solid #85858d;
   border-width: 5px;
 }
 
@@ -103,7 +103,7 @@
 //   margin: 2rem 0;
 // }
 
-.form-label{
+.form-label {
   font-size: 1.4rem;
   font-weight: 500;
   color: #1a1a1f;
@@ -145,10 +145,15 @@ input:focus,
   flex-direction: column;
 }
 
+.title-input {
+  align-self: flex-start;
+}
+
 .textarea {
   width: 100%;
   height: 12.4rem;
   margin-top: 1rem;
+  resize: none;
 }
 
 .categories-input {
@@ -163,8 +168,8 @@ input:focus,
 }
 
 .categories-input:focus {
-  border: 1px solid #5D37F3;
-  background-color: #F7F7FF;
+  border: 1px solid #5d37f3;
+  background-color: #f7f7ff;
 }
 
 .show-hide-categories {
@@ -235,13 +240,13 @@ button {
 }
 
 .category-div-valid {
-  border: 1.5px solid #14D81C;
-  background-color: #F8FFF8;
+  border: 1.5px solid #14d81c;
+  background-color: #f8fff8;
 }
 
 .category-div-focused {
-  background-color: #F7F7FF;
-  border: 1.5px solid #5D37F3;
+  background-color: #f7f7ff;
+  border: 1.5px solid #5d37f3;
 }
 
 .category-btn {
@@ -273,7 +278,63 @@ button {
 
 .email-form-container {
   display: flex;
-  align-items: start;
-  justify-content: start;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
+}
+
+.author-validations {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #85858d;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+li::marker {
+  color: #85858d;
+  font-size: 0.8rem;
+}
+
+input {
+  margin-bottom: 0.7rem;
+}
+
+.title-warning-message {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #85858d;
+}
+
+// VALIDATION STYLES
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid #ea1919;
+  background-color: #faf2f3;
+  border-radius: 5px;
+}
+
+.invalid {
+  color: #ea1919;
+}
+
+.valid {
+  color: #14d81c;
+}
+
+.valid li::marker {
+  color: #14d81c;
+}
+
+input.ng-valid {
+  background-color: hsl(120, 100%, 99%) !important;
+  border: 1px solid #14d81c !important;
+}
+
+textarea.ng-valid {
+  background-color: hsl(120, 100%, 99%) !important;
+  border: 1px solid #14d81c !important;
 }
