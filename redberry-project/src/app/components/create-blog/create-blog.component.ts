@@ -10,11 +10,12 @@ import {
 import { Category } from 'src/app/models/models.interface';
 import { Observable, take } from 'rxjs';
 import { BlogsService } from 'src/app/services/blogs.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-create-blog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent],
   templateUrl: './create-blog.component.html',
   styleUrls: ['./create-blog.component.scss'],
 })
@@ -33,6 +34,9 @@ export class CreateBlogComponent implements OnInit {
   // Selected categories
   selectedCategories$!: Observable<Category[]>;
 
+  // Show loading spinner when the request gets sent.
+  isLoading = false;
+
   constructor(private blogsService: BlogsService) {}
 
   ngOnInit(): void {
@@ -43,8 +47,14 @@ export class CreateBlogComponent implements OnInit {
     this.categories$.subscribe((val) => console.log(val));
 
     this.blogForm = new FormGroup({
-      title: new FormControl(null, [Validators.required, Validators.minLength(4)]),
-      description: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      description: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
       image: new FormControl(null),
       author: new FormControl(null, [
         Validators.required,
@@ -54,32 +64,32 @@ export class CreateBlogComponent implements OnInit {
       ]),
       publish_date: new FormControl(null, Validators.required),
       categories: new FormArray([], Validators.required),
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null),
     });
   }
 
   // Get each fromControl from the form to shorten the input for templates.
-  get author(){
+  get author() {
     return this.blogForm.get('author');
   }
 
-  get title(){
+  get title() {
     return this.blogForm.get('title');
   }
 
-  get description(){
+  get description() {
     return this.blogForm.get('description');
   }
 
-  get image(){
+  get image() {
     return this.blogForm.get('image');
   }
 
-  get email(){
+  get email() {
     return this.blogForm.get('email');
   }
 
-  get date(){
+  get date() {
     return this.blogForm.get('publish_date');
   }
 
@@ -148,11 +158,11 @@ export class CreateBlogComponent implements OnInit {
     this.selectedPhoto = file;
   }
 
-  onDeletePhoto(){
+  onDeletePhoto() {
     console.log('remove photo');
     this.blogForm?.patchValue({
-      image: null
-    })
+      image: null,
+    });
 
     this.selectedPhoto = null;
   }
@@ -228,11 +238,13 @@ export class CreateBlogComponent implements OnInit {
 
     // Check if there are more than two words.
     if (typedWords.length !== 2) {
-      console.log('yes');
       return { manyWords: true };
     }
-    console.log('no');
 
     return null;
+  }
+
+  showSpinner() {
+    this.isLoading = !this.isLoading;
   }
 }

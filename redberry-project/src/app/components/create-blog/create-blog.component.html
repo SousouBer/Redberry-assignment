@@ -1,4 +1,18 @@
 <section class="blog-section">
+  <!-- <div class="blog-creation-success">
+    <div class="success-container">
+      <div class="close-container">
+        <img [src]="'assets/imgs/add.png'" alt="Close modal icon">
+      </div>
+      <div class="message-and-logo">
+        <div class="logo-container">
+          <img [src]="'assets/imgs/tick-circle.png'" alt="Success icon">
+        </div>
+        <p class="success-message">ჩანაწი წარმატებით დაემატა</p>
+      </div>
+      <button class="success-btn" type="button">მთავარ გვერდზე დაბრუნება</button>
+    </div>
+  </div> -->
   <form [formGroup]="blogForm" class="blog-section-container" (ngSubmit)="onSubmit()">
     <h1 class="section-heading">ბლოგის დამატება</h1>
     <span class="upload-photo-title">ატვირთეთ ფოტო</span>
@@ -83,9 +97,16 @@
     <div class="two-inputs-container email-form-container">
       <label class="form-label label-title" for="email">ელ-ფოსტა</label>
       <input formControlName="email" type="email" id="email" placeholder="შეიყვანეთ იმეილი">
+      <div class="email-error">
+        <div class="icon-wrapper">
+          <img [src]="'assets/imgs/info-circle.png'" alt="Warning icon">
+        </div>
+        <span class="email-error-message">მეილი უნდა მთავრდებოდეს @redberry.ge-ით</span>
+      </div>
     </div>
     <div class="btn-container">
-      <button class="submit-btn" type="submit">გამოქვეყნება</button>
+      <app-spinner *ngIf="isLoading" (click)="showSpinner()"></app-spinner>
+      <button *ngIf="!isLoading" (click)="showSpinner()" class="submit-btn" type="submit">გამოქვეყნება</button>
     </div>
   </form>
 </section>
