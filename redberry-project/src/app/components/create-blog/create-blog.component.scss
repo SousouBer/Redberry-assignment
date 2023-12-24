@@ -60,6 +60,7 @@
 }
 
 .uploaded-photo-container {
+  margin-top: 1rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -76,7 +77,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
+}
+
+// .logo-title-container .logo-container {
+//   width: 2.4rem;
+//   height: 2.4rem;
+// }
+
+.uploaded-logo-container {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.img-name {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #1a1a1f;
 }
 
 .img-title {
@@ -85,15 +102,17 @@
   font-weight: 400;
 }
 
-.logo-container img {
-  width: 100%;
+.close-btn-container img {
+  cursor: pointer;
 }
 
 .two-inputs-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin: 2rem 0;
+  margin-top: 2.5rem;
 }
 
 // .author-title-container {
@@ -153,7 +172,12 @@ input:focus,
   width: 100%;
   height: 12.4rem;
   margin-top: 1rem;
+  margin-bottom: 1.2rem;
   resize: none;
+}
+
+.description-input {
+  margin: 3rem 0;
 }
 
 .categories-input {
@@ -177,17 +201,6 @@ input:focus,
   cursor: pointer;
 }
 
-button {
-  cursor: pointer;
-  white-space: nowrap;
-  font-weight: 500;
-  font-size: 1.2rem;
-  border: none;
-  font-family: inherit;
-  padding: 0.5rem 1rem;
-  border-radius: 13px;
-}
-
 .chosen-categories {
   display: flex;
   gap: 0.8rem;
@@ -205,9 +218,9 @@ button {
   bottom: 0;
   right: 0;
   transform: translateY(100%);
-  padding: 1rem;
+  padding: 1.8rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   background-color: #ffffff;
   border-radius: 1px solid #e4e3eb;
@@ -235,8 +248,9 @@ button {
   background: #555;
 }
 
-.thiss {
+.date-and-categories {
   position: relative;
+  margin-bottom: 0;
 }
 
 .category-div-valid {
@@ -255,7 +269,7 @@ button {
   font-size: 1.2rem;
   border: none;
   font-family: inherit;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 13px;
   display: flex;
   align-items: center;
@@ -264,6 +278,7 @@ button {
 .delete-icon-container {
   width: 1.6rem;
   height: 1.6rem;
+  margin-left: 7px;
 }
 
 .delete-icon-container img {
@@ -281,6 +296,8 @@ button {
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 8rem;
 }
 
 .author-validations {
@@ -337,4 +354,31 @@ input.ng-valid {
 textarea.ng-valid {
   background-color: hsl(120, 100%, 99%) !important;
   border: 1px solid #14d81c !important;
+}
+
+.btn-container {
+  text-align: end;
+  margin-bottom: 5rem;
+}
+
+.submit-btn {
+  border: none;
+  background-color: #5d37f3;
+  padding: 1rem 10rem;
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.choose-category {
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 1.2rem;
+  border: none;
+  font-family: inherit;
+  padding: 1rem 1.5rem;
+  border-radius: 13px;
 }

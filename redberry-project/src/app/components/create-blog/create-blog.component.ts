@@ -148,6 +148,15 @@ export class CreateBlogComponent implements OnInit {
     this.selectedPhoto = file;
   }
 
+  onDeletePhoto(){
+    console.log('remove photo');
+    this.blogForm?.patchValue({
+      image: null
+    })
+
+    this.selectedPhoto = null;
+  }
+
   // Custom validations
 
   // Test for only Georgian words.
