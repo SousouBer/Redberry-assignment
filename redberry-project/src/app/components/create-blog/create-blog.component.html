@@ -1,4 +1,7 @@
 <section class="blog-section">
+  <button routerLink="/blogs" class="back-btn">
+    <img [src]="'assets/imgs/arrow-svg.svg'" alt="Arrow icon">
+  </button>
   <div *ngIf="showModalWindow" class="blog-creation-success">
     <div class="success-container">
       <div class="close-container">
@@ -69,6 +72,7 @@
           <!-- Additional Div container to enable horizontal scrolling. -->
           <div class="create-sctoller">
             <div formControlArray="categories" class="chosen-categories">
+              <span *ngIf="!(selectedCategories$ | async)?.length" class="category-input">აირჩიეთ კატეგორია</span>
               <ng-container *ngFor="let category of selectedCategories$ | async; let i = index">
                 <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">
                   <span>{{ category.title }}</span>
@@ -97,7 +101,7 @@
     </div>
     <div class="two-inputs-container email-form-container">
       <label class="form-label label-title" for="email">ელ-ფოსტა</label>
-      <input [ngClass]="{ 'ng-valid': email?.dirty }" formControlName="email" type="email" id="email" placeholder="შეიყვანეთ იმეილი">
+      <input [class.ng-valid]="email?.touched" formControlName="email" type="email" id="email" placeholder="შეიყვანეთ იმეილი">
       <div *ngIf="email?.invalid || email?.errors?.['invalidEmailAddress']" class="email-error">
         <div class="icon-wrapper">
           <img [src]="'assets/imgs/info-circle.png'" alt="Warning icon">

@@ -11,11 +11,12 @@ import { Category } from 'src/app/models/models.interface';
 import { Observable, take } from 'rxjs';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-blog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent],
+  imports: [CommonModule, ReactiveFormsModule, SpinnerComponent, RouterModule],
   templateUrl: './create-blog.component.html',
   styleUrls: ['./create-blog.component.scss'],
 })
@@ -246,7 +247,7 @@ export class CreateBlogComponent implements OnInit {
     return null;
   }
 
-  // Test for containing only two words.
+  // Validation for containing two or more words.
   onlyTwoWords(control: FormControl): { [s: string]: boolean } | null {
     const value = control.value;
 
@@ -258,8 +259,8 @@ export class CreateBlogComponent implements OnInit {
     // Use whitespace as the delimiter and split the input.
     const typedWords = value.trim().split(' ');
 
-    // Check if there are more than two words.
-    if (typedWords.length !== 2) {
+    // Check if there are less than two words.
+    if (typedWords.length < 2) {
       return { manyWords: true };
     }
 
