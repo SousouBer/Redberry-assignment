@@ -37,6 +37,12 @@ export class CreateBlogComponent implements OnInit {
   // Show loading spinner when the request gets sent.
   isLoading = false;
 
+  // Conditionally show modal window.
+  showModalWindow = false;
+
+  // Conditionally display error, if a user uploads non-image file.
+  showUploadError = false;
+
   constructor(private blogsService: BlogsService) {}
 
   ngOnInit(): void {
@@ -44,7 +50,7 @@ export class CreateBlogComponent implements OnInit {
     this.selectedCategories$ = this.blogsService.returnSelectedCategories();
 
     this.blogsService.init();
-    this.categories$.subscribe((val) => console.log(val));
+    // this.categories$.subscribe((val) => console.log(val));
 
     this.blogForm = new FormGroup({
       title: new FormControl(null, [
@@ -55,7 +61,7 @@ export class CreateBlogComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-      image: new FormControl(null),
+      image: new FormControl(null, Validators.required),
       author: new FormControl(null, [
         Validators.required,
         Validators.minLength(4),
@@ -64,7 +70,7 @@ export class CreateBlogComponent implements OnInit {
       ]),
       publish_date: new FormControl(null, Validators.required),
       categories: new FormArray([], Validators.required),
-      email: new FormControl(null),
+      email: new FormControl(null, Validators.compose([Validators.email, this.containsRequiredPart.bind(this)])),
     });
   }
 
@@ -135,9 +141,9 @@ export class CreateBlogComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
+    console.log('clicked');
     const formData = new FormData();
-
-    console.log('valid');
 
     formData.append('title', this.blogForm.get('title')?.value);
     formData.append('description', this.blogForm.get('description')?.value);
@@ -150,12 +156,28 @@ export class CreateBlogComponent implements OnInit {
     );
     formData.append('email', this.blogForm.get('email')?.value);
 
-    // this.blogsService.createBlog(formData).subscribe((res) => console.log(res));
+    this.blogsService.createBlog(formData).subscribe((res) => {
+      console.log(res);
+      this.isLoading = false;
+      this.showModalWindow = true;
+    });
   }
 
   onPhotoSelected(event: any): void {
     const file = event.target.files[0];
-    this.selectedPhoto = file;
+
+    // Take the first value that is the tyoe of the file.
+    const fileType = file.type.split('/')[0];
+
+    if(fileType === 'image'){
+      this.showUploadError = false;
+      this.selectedPhoto = file;
+    } else {
+      this.showUploadError = true;
+      this.blogForm.patchValue({
+        image: null
+      })
+    }
   }
 
   onDeletePhoto() {
@@ -246,5 +268,28 @@ export class CreateBlogComponent implements OnInit {
 
   showSpinner() {
     this.isLoading = !this.isLoading;
+  }
+
+  hideModal(){
+    this.showModalWindow = false;
+  }
+
+  // Custom validator for email to check whether it ends with @redberry.ge
+  containsRequiredPart(control: FormControl): { [s: string]: boolean } | null {
+    const value = control.value;
+    const emailPart = '@redberry.ge';
+
+    if (!value) {
+      return null;
+    }
+
+    const startIndex = value.length - emailPart.length;
+    const domain = value.slice(startIndex).toLowerCase();
+
+    if (domain === emailPart) {
+      return null;
+    } else {
+      return { 'invalidEmailAddress': true };
+    }
   }
 }

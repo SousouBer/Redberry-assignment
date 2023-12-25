@@ -4,11 +4,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { BlogsPageComponent } from './components/blogs-page/blogs-page.component';
 import { SingleBlogComponent } from './components/single-blog/single-blog.component';
 import { CreateBlogComponent } from './components/create-blog/create-blog.component';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [CommonModule, HeaderComponent, BlogsPageComponent, SingleBlogComponent, CreateBlogComponent],
+  imports: [CommonModule, HeaderComponent, BlogsPageComponent, SingleBlogComponent, CreateBlogComponent, RouterModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

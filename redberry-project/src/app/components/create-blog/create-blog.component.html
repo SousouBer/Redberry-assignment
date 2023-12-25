@@ -1,8 +1,8 @@
 <section class="blog-section">
-  <!-- <div class="blog-creation-success">
+  <div *ngIf="showModalWindow" class="blog-creation-success">
     <div class="success-container">
       <div class="close-container">
-        <img [src]="'assets/imgs/add.png'" alt="Close modal icon">
+        <img [src]="'assets/imgs/add.png'" alt="Close modal icon" (click)="hideModal()">
       </div>
       <div class="message-and-logo">
         <div class="logo-container">
@@ -12,18 +12,19 @@
       </div>
       <button class="success-btn" type="button">მთავარ გვერდზე დაბრუნება</button>
     </div>
-  </div> -->
+  </div>
   <form [formGroup]="blogForm" class="blog-section-container" (ngSubmit)="onSubmit()">
     <h1 class="section-heading">ბლოგის დამატება</h1>
     <span class="upload-photo-title">ატვირთეთ ფოტო</span>
     <div *ngIf="!selectedPhoto" class="upload-photo-section">
-      <div class="upload-photo-container">
+      <div [class.invalid-upload-file]="showUploadError" class="upload-photo-container">
         <div class="logo-container">
           <img [src]="'assets/imgs/folder-add.png'" alt="Folder add logo">
         </div>
         <input formControlName="image" (change)="onPhotoSelected($event)" type="file" id="photo-input" class="form-input" hidden>
         <span class="upload-info">ჩააგდეთ ფაილი აქ ან<label class="form-label upload-info" for="photo-input"> აირჩიეთ ფაილი</label></span>
       </div>
+      <p class="file-upload-error invalid" *ngIf="showUploadError">დაშვებულია მხოლოდ ფოტოს ატვირთვა</p>
     </div>
     <div *ngIf="selectedPhoto" class="uploaded-photo-container">
       <div class="logo-title-container">
@@ -96,8 +97,8 @@
     </div>
     <div class="two-inputs-container email-form-container">
       <label class="form-label label-title" for="email">ელ-ფოსტა</label>
-      <input formControlName="email" type="email" id="email" placeholder="შეიყვანეთ იმეილი">
-      <div class="email-error">
+      <input [ngClass]="{ 'ng-valid': email?.dirty }" formControlName="email" type="email" id="email" placeholder="შეიყვანეთ იმეილი">
+      <div *ngIf="email?.invalid || email?.errors?.['invalidEmailAddress']" class="email-error">
         <div class="icon-wrapper">
           <img [src]="'assets/imgs/info-circle.png'" alt="Warning icon">
         </div>
@@ -106,7 +107,7 @@
     </div>
     <div class="btn-container">
       <app-spinner *ngIf="isLoading" (click)="showSpinner()"></app-spinner>
-      <button *ngIf="!isLoading" (click)="showSpinner()" class="submit-btn" type="submit">გამოქვეყნება</button>
+      <button *ngIf="!isLoading" [disabled]="!blogForm.valid" class="submit-btn" type="submit">გამოქვეყნება</button>
     </div>
   </form>
 </section>

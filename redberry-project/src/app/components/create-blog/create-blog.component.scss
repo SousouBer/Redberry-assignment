@@ -405,6 +405,7 @@ textarea.ng-valid {
 
 .close-container {
   text-align: end;
+  cursor: pointer;
 }
 
 .logo-container {
@@ -467,5 +468,16 @@ textarea.ng-valid {
 .email-error-message {
   font-size: 1.2rem;
   color: #EA1919;
+  font-weight: 400;
+}
+
+.invalid-upload-file {
+  border: 1px dashed #ea1919;
+  background-color: #faf2f3;
+}
+
+.file-upload-error {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
 }
