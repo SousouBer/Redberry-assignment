@@ -25,6 +25,7 @@ export class BlogsService {
 
   // Subject for holding the current user values.
   user = new BehaviorSubject<User | null>(null);
+  isLoggedIn = new BehaviorSubject<boolean>(false);
 
   // Subject that hold the data of the categories.
   private categories$ = new BehaviorSubject<Category[]>([]);
@@ -81,7 +82,8 @@ export class BlogsService {
       tap(() => {
         const currentUser = new User(loginDetails.email, this.token);
 
-        this.user.next(currentUser);
+        // this.user.next(currentUser);
+        this.isLoggedIn.next(true);
       })
     );
   }

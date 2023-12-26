@@ -13,7 +13,7 @@
         </div>
         <p class="success-message">ჩანაწი წარმატებით დაემატა</p>
       </div>
-      <button class="success-btn" type="button">მთავარ გვერდზე დაბრუნება</button>
+      <button class="success-btn" type="button" (click)="redirectToBlogs()">მთავარ გვერდზე დაბრუნება</button>
     </div>
   </div>
   <form [formGroup]="blogForm" class="blog-section-container" (ngSubmit)="onSubmit()">

@@ -11,7 +11,7 @@ import { Category } from 'src/app/models/models.interface';
 import { Observable, take } from 'rxjs';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-blog',
@@ -44,7 +44,7 @@ export class CreateBlogComponent implements OnInit {
   // Conditionally display error, if a user uploads non-image file.
   showUploadError = false;
 
-  constructor(private blogsService: BlogsService) {}
+  constructor(private blogsService: BlogsService, private route: Router) {}
 
   ngOnInit(): void {
     const imgUrl = localStorage.getItem('selectedPhoto');
@@ -140,8 +140,11 @@ export class CreateBlogComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = true;
-    console.log('clicked');
+
     const formData = new FormData();
+
+    const categoriesID = this.categories.value.map((category: Category) => category.id);
+    console.log(categoriesID);
 
     formData.append('title', this.blogForm.get('title')?.value);
     formData.append('description', this.blogForm.get('description')?.value);
@@ -150,7 +153,7 @@ export class CreateBlogComponent implements OnInit {
     formData.append('publish_date', this.blogForm.get('publish_date')?.value);
     formData.append(
       'categories',
-      JSON.stringify(this.blogForm.get('categories')?.value)
+      JSON.stringify(categoriesID)
     );
     formData.append('email', this.blogForm.get('email')?.value);
 
@@ -158,6 +161,15 @@ export class CreateBlogComponent implements OnInit {
       console.log(res);
       this.isLoading = false;
       this.showModalWindow = true;
+
+      // Clear local storage
+      localStorage.removeItem('blogValues');
+      localStorage.removeItem('selectedPhoto');
+      localStorage.removeItem('selectedPhotoFilename');
+      this.selectedPhoto = null;
+
+      // Reset form values.
+      this.blogForm.reset();
     });
   }
 
@@ -327,11 +339,13 @@ export class CreateBlogComponent implements OnInit {
 
     this.blogForm.patchValue(savedValues);
 
-    savedValues.categories.map((category: Category) => {
-      const control = new FormControl(category);
+    if(savedValues){
+      savedValues.categories.map((category: Category) => {
+        const control = new FormControl(category);
 
-      this.categories.push(control);
-    })
+        this.categories.push(control);
+      })
+    }
 
   }
 
@@ -340,6 +354,11 @@ export class CreateBlogComponent implements OnInit {
     localStorage.setItem('blogValues', JSON.stringify(this.blogForm.value));
 
     console.log(JSON.parse(<string>localStorage.getItem('blogValues')));
+  }
+
+  redirectToBlogs(){
+    this.route.navigate(['/blogs']);
+    this.showModalWindow = false;
   }
 
 }
