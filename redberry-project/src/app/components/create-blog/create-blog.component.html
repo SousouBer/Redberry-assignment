@@ -68,16 +68,16 @@
       </div>
       <div class="title-input">
         <label class="form-label label-title required" for="categories">კატეგორია</label>
-        <div class="categories-input" [class.category-div-valid]="(selectedCategories$ | async)?.length" [class.category-div-focused]="isShown">
+        <div class="categories-input" [class.category-div-valid]="categories.controls.length" [class.category-div-focused]="isShown">
           <!-- Additional Div container to enable horizontal scrolling. -->
           <div class="create-sctoller">
             <div formControlArray="categories" class="chosen-categories">
-              <span *ngIf="!(selectedCategories$ | async)?.length" class="category-input">აირჩიეთ კატეგორია</span>
-              <ng-container *ngFor="let category of selectedCategories$ | async; let i = index">
-                <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">
-                  <span>{{ category.title }}</span>
+              <span *ngIf="!categories.controls?.length" class="category-input">აირჩიეთ კატეგორია</span>
+              <ng-container *ngFor="let control of categories?.controls; let i = index">
+                <div class="category-btn" [ngStyle]="{ 'color': control.value?.text_color, 'background-color': control.value?.background_color}">
+                  <span>{{ control.value.title }}</span>
                   <div class="delete-icon-container">
-                    <img [src]="'assets/imgs/add-white.png'" (click)="onRemoveCategory(i, category.id)" alt="Remove icon">
+                    <img [src]="'assets/imgs/add-white.png'" (click)="onRemoveCategory(control.value)" alt="Remove icon">
                   </div>
                 </div>
               </ng-container>
@@ -88,15 +88,10 @@
           </div>
           <div *ngIf="isShown" class="categories">
             <ng-container *ngFor="let category of categories$ | async">
-              <button type="button" (click)="addCategory(category.id)" class="category-btn choose-category" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
+              <button type="button" (click)="addCategory(category)" class="category-btn choose-category" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
             </ng-container>
           </div>
         </div>
-        <!-- <div *ngIf="isShown" class="categories">
-          <ng-container *ngFor="let category of categories$ | async">
-            <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
-          </ng-container>
-        </div> -->
       </div>
     </div>
     <div class="two-inputs-container email-form-container">

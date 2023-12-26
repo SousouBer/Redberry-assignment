@@ -47,11 +47,19 @@ export class CreateBlogComponent implements OnInit {
   constructor(private blogsService: BlogsService) {}
 
   ngOnInit(): void {
+    const imgUrl = localStorage.getItem('selectedPhoto');
+
+    if (imgUrl) {
+      const defaultFilename = 'uploadedImage.png';
+
+      const filename = localStorage.getItem('selectedPhotoFilename') || defaultFilename;
+      this.selectedPhoto = this.dataURLtoFile(imgUrl, filename);
+    }
+
     this.categories$ = this.blogsService.getCategories();
     this.selectedCategories$ = this.blogsService.returnSelectedCategories();
 
     this.blogsService.init();
-    // this.categories$.subscribe((val) => console.log(val));
 
     this.blogForm = new FormGroup({
       title: new FormControl(null, [
@@ -73,6 +81,13 @@ export class CreateBlogComponent implements OnInit {
       categories: new FormArray([], Validators.required),
       email: new FormControl(null, Validators.compose([Validators.email, this.containsRequiredPart.bind(this)])),
     });
+
+    this.loadFormValues();
+    this.blogForm.valueChanges.subscribe(() => {
+      this.saveToLocalStorage();
+      console.log('called');
+    });
+
   }
 
   // Get each fromControl from the form to shorten the input for templates.
@@ -100,45 +115,27 @@ export class CreateBlogComponent implements OnInit {
     return this.blogForm.get('publish_date');
   }
 
+  get categories(){
+    return this.blogForm.get('categories') as FormArray;
+  }
+
   showOrHideCategories() {
     this.isShown = !this.isShown;
   }
 
-  addCategory(id: number) {
-    console.log(id);
+  addCategory(category: Category) {
+    const control = new FormControl(category);
+    const formArrayControls = this.categories.controls;
 
-    this.categories$.pipe(take(1)).subscribe((categories) => {
-      const selectedCategory = categories.find(
-        (category) => category.id === id
-      ) as Category;
+    const isAlreadyAdded = formArrayControls.some(category => category.value.id === control.value?.id);
 
-      const currentItems = this.blogsService.selectedCategories$.value;
-
-      if (!currentItems.includes(selectedCategory)) {
-        const updatedItems = [...currentItems, selectedCategory] as Category[];
-        this.blogsService.selectedCategories$.next(updatedItems);
-        this.onAddCategory(selectedCategory);
-      }
-    });
+    if (!isAlreadyAdded) {
+      this.categories.push(control);
   }
+}
 
-  onAddCategory(category: Category) {
-    const control = new FormControl(category.id);
-
-    (<FormArray>this.blogForm.get('categories')).push(control);
-
-    console.log((<FormArray>this.blogForm.get('categories')).value);
-  }
-
-  onRemoveCategory(id: number, category_id: number) {
+  onRemoveCategory(id: number) {
     (<FormArray>this.blogForm.get('categories')).removeAt(id);
-
-    const currentItems = this.blogsService.selectedCategories$.value;
-    const updatedItems = currentItems.filter(
-      (category) => category.id !== category_id
-    );
-
-    this.blogsService.selectedCategories$.next(updatedItems);
   }
 
   onSubmit() {
@@ -148,7 +145,7 @@ export class CreateBlogComponent implements OnInit {
 
     formData.append('title', this.blogForm.get('title')?.value);
     formData.append('description', this.blogForm.get('description')?.value);
-    formData.append('image', <File>this.selectedPhoto); // Assuming 'image' is a file input
+    formData.append('image', <File>this.selectedPhoto);
     formData.append('author', this.blogForm.get('author')?.value);
     formData.append('publish_date', this.blogForm.get('publish_date')?.value);
     formData.append(
@@ -172,7 +169,23 @@ export class CreateBlogComponent implements OnInit {
 
     if(fileType === 'image'){
       this.showUploadError = false;
-      this.selectedPhoto = file;
+    this.selectedPhoto = file;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const imgUrl = reader.result as string;
+
+      // Save the image URL to local storage
+      localStorage.setItem('selectedPhoto', imgUrl);
+      // Save the filename to local storage
+      localStorage.setItem('selectedPhotoFilename', file.name);
+
+      // Create the File object with the original filename
+      this.selectedPhoto = this.dataURLtoFile(imgUrl, file.name);
+    };
+
+    reader.readAsDataURL(file);
     } else {
       this.showUploadError = true;
       this.blogForm.patchValue({
@@ -181,8 +194,22 @@ export class CreateBlogComponent implements OnInit {
     }
   }
 
+  private dataURLtoFile(dataURL: string, filename: string): File {
+    const arr = dataURL.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+
   onDeletePhoto() {
-    console.log('remove photo');
+    // Delete IMG URL from the data storage.
+    const imgUrl = localStorage.removeItem('selectedPhoto');
+
     this.blogForm?.patchValue({
       image: null,
     });
@@ -293,4 +320,26 @@ export class CreateBlogComponent implements OnInit {
       return { 'invalidEmailAddress': true };
     }
   }
+
+  // Get data back from the Local storage.
+  loadFormValues() {
+    const savedValues = JSON.parse(<string>localStorage.getItem('blogValues'));
+
+    this.blogForm.patchValue(savedValues);
+
+    savedValues.categories.map((category: Category) => {
+      const control = new FormControl(category);
+
+      this.categories.push(control);
+    })
+
+  }
+
+  // Save values to local storage.
+  saveToLocalStorage() {
+    localStorage.setItem('blogValues', JSON.stringify(this.blogForm.value));
+
+    console.log(JSON.parse(<string>localStorage.getItem('blogValues')));
+  }
+
 }
