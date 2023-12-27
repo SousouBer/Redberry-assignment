@@ -340,11 +340,15 @@ input {
 // VALIDATION STYLES
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
-  border: 1px solid #ea1919;
-  background-color: #faf2f3;
+  border: 1px solid #ea1919 !important;
+  background-color: #faf2f3 !important;
 }
 
 .invalid {
+  color: #ea1919;
+}
+
+.invalid::marker {
   color: #ea1919;
 }
 
@@ -352,7 +356,7 @@ textarea.ng-invalid.ng-touched {
   color: #14d81c;
 }
 
-.valid li::marker {
+.valid::marker {
   color: #14d81c;
 }
 

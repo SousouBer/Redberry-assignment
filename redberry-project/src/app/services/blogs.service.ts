@@ -84,6 +84,8 @@ export class BlogsService {
 
         // this.user.next(currentUser);
         this.isLoggedIn.next(true);
+
+        localStorage.setItem('authenticatedUser', 'OK');
       })
     );
   }

@@ -53,13 +53,13 @@
       <div class="title-input">
         <label class="form-label label-title required" for="title">სათაური</label>
         <input formControlName="title" type="text" id="title" placeholder="შეიყვანე სათაური">
-        <span class="title-warning-message" [class.invalid]="title?.errors?.['minlength'] || title?.touched" [class.valid]="!title?.errors?.['minlength'] && title?.value?.length">მინიმუმ 4 სიმბოლო</span>
+        <span class="title-warning-message" [class.invalid]="title?.errors?.['minlength'] || title?.touched" [class.valid]="!title?.errors?.['minlength'] && title?.value?.length">მინიმუმ 2 სიმბოლო</span>
       </div>
     </div>
     <div class="description-input">
       <label class="form-label label-title required" for="description">აღწერა</label>
       <textarea formControlName="description" class="textarea" name="description" id="description" placeholder="შეიყვანეთ აღწერა"></textarea>
-      <span class="title-warning-message" [class.invalid]="description?.errors?.['minlength'] || description?.touched" [class.valid]="!description?.errors?.['minlength'] && description?.value?.length">მინიმუმ 4 სიმბოლო</span>
+      <span class="title-warning-message" [class.invalid]="description?.errors?.['minlength'] || description?.touched" [class.valid]="!description?.errors?.['minlength'] && description?.value?.length">მინიმუმ 2 სიმბოლო</span>
     </div>
     <div class="two-inputs-container date-and-categories">
       <div class="author-input">

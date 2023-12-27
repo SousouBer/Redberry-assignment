@@ -1,15 +1,14 @@
 <div *ngIf="showOrHideModal$ | async" class="login-form-container">
   <app-login *ngIf="!(authenticated$ | async)"></app-login>
-  <!-- <app-login></app-login> -->
   <app-login-success *ngIf="authenticated$ | async"></app-login-success>
 </div>
 <header class="header" [class.centre-redberry-logo]="hideButtons">
-  <div class="logo-container">
+  <div class="logo-container" routerLink="/blogs">
     <img class="redberry-logo" [src]="'assets/imgs/redberry-logo.png'" alt="Redberry Logo">
   </div>
-  <div *ngIf="loggedIn" class="logged-in-user">
-    <button class="login-button">გამოსვლა</button>
-    <button class="login-button" routerLink='/create-blog'>შექმენით ბლოგი</button>
+  <div *ngIf="!hideButtons && loggedIn" class="logged-in-user">
+    <button class="login-button" (click)="logOut()">გამოსვლა</button>
+    <button class="login-button" routerLink='/create-blog'>დაამატე ბლოგი</button>
   </div>
   <button *ngIf="!loggedIn" class="login-button" (click)="showModal()">შესვლა</button>
 </header>

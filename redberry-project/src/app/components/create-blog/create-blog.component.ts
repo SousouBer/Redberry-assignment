@@ -64,11 +64,11 @@ export class CreateBlogComponent implements OnInit {
     this.blogForm = new FormGroup({
       title: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(2),
       ]),
       description: new FormControl(null, [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(2),
       ]),
       image: new FormControl(null, Validators.required),
       author: new FormControl(null, [
@@ -79,7 +79,7 @@ export class CreateBlogComponent implements OnInit {
       ]),
       publish_date: new FormControl(null, Validators.required),
       categories: new FormArray([], Validators.required),
-      email: new FormControl(null, Validators.compose([Validators.email, this.containsRequiredPart.bind(this)])),
+      email: new FormControl('', Validators.compose([Validators.email, this.containsRequiredPart.bind(this)])),
     });
 
     this.loadFormValues();
@@ -146,16 +146,19 @@ export class CreateBlogComponent implements OnInit {
     const categoriesID = this.categories.value.map((category: Category) => category.id);
     console.log(categoriesID);
 
-    formData.append('title', this.blogForm.get('title')?.value);
-    formData.append('description', this.blogForm.get('description')?.value);
+    formData.append('title', this.title?.value);
+    formData.append('description', this.description?.value);
     formData.append('image', <File>this.selectedPhoto);
-    formData.append('author', this.blogForm.get('author')?.value);
-    formData.append('publish_date', this.blogForm.get('publish_date')?.value);
+    formData.append('author', this.author?.value);
+    formData.append('publish_date', this.date?.value);
     formData.append(
       'categories',
       JSON.stringify(categoriesID)
     );
-    formData.append('email', this.blogForm.get('email')?.value);
+     // Send email control only if the value is not null.
+     formData.append('email', this.email?.value);
+    //  if(this.email?.value !== null) {
+    // }
 
     this.blogsService.createBlog(formData).subscribe((res) => {
       console.log(res);
@@ -180,7 +183,7 @@ export class CreateBlogComponent implements OnInit {
         control.clear();
       } else {
         // For regular controls
-        control?.setValue(null);
+        control?.setValue('');
         control?.setErrors(null);
         control?.markAsPristine();
         control?.markAsUntouched();

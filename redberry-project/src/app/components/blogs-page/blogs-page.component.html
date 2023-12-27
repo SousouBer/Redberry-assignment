@@ -8,13 +8,13 @@
   <div class="center-categories">
     <div class="categories-container">
       <ng-container *ngFor="let category of categories$ | async">
-        <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</button>
+        <button class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}" [class.chosen-category-border]="chosenCategories.includes(category.id)" (click)="addToFilterArray(category.id)">{{ category.title }}</button>
       </ng-container>
     </div>
   </div>
   <div class="blogs-container">
     <div class="blogs">
-      <ng-container *ngFor="let blog of createdBlogs$ | async">
+      <ng-container *ngFor="let blog of createdBlogs$ | async | filterBlogs:chosenCategories">
         <app-blog-item [blogItem]="blog"></app-blog-item>
       </ng-container>
     </div>

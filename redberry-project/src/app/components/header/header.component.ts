@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       } else {
         this.hideButtons = false;
       }
-      // console.log('Route URL:', this.router.url);
+      console.log(this.hideButtons);
     });
 
     this.blogsService.isLoggedIn.subscribe(val => {
@@ -54,6 +54,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   showModal(){
     this.blogsService.showModal$.next(true);
+  }
+
+  logOut(){
+    this.blogsService.isLoggedIn.next(false);
+    localStorage.removeItem('authenticatedUser');
+    this.router.navigate(['/blogs']);
   }
 
   ngOnDestroy(): void {
