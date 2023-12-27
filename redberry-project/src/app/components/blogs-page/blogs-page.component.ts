@@ -22,7 +22,7 @@ export class BlogsPageComponent implements OnInit {
 
   // This array is used to filter the output.
   // chosenCategories: number[] = [14, 5];
-  chosenCategoriesSubject$ = new BehaviorSubject<number[]>([2, 1, 3]);
+  chosenCategoriesSubject$ = new BehaviorSubject<number[]>([]);
   chosenCategories: number[] = [];
 
   constructor(private blogsService: BlogsService) {}
@@ -39,6 +39,14 @@ export class BlogsPageComponent implements OnInit {
 
     // this.createdBlogs$.subscribe((val) => console.log(val));
     this.chosenCategoriesSubject$.subscribe(value => this.chosenCategories = value);
+
+    // Get categories from the local storage.
+    if(localStorage.getItem('filteredCategories')){
+      const items = JSON.parse(<string>localStorage.getItem('filteredCategories'));
+      console.log(items);
+
+      this.chosenCategoriesSubject$.next(items);
+    }
   }
 
   addToFilterArray(id: number) {
@@ -52,5 +60,7 @@ export class BlogsPageComponent implements OnInit {
       getCurrentCategories.push(id);
       this.chosenCategoriesSubject$.next(getCurrentCategories.slice());
     }
+
+    localStorage.setItem('filteredCategories', JSON.stringify(getCurrentCategories));
   }
 }

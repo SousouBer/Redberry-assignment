@@ -86,9 +86,14 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 3rem;
-  width: 128.8rem
+  min-width: 128.8rem
+  // width: 100%;
 }
 
 .chosen-category-border {
   border: 1px solid #000000 !important;
 }
+
+// .blog-item {
+//   flex: 1;
+// }
