@@ -162,14 +162,33 @@ export class CreateBlogComponent implements OnInit {
       this.isLoading = false;
       this.showModalWindow = true;
 
-      // Clear local storage
-      localStorage.removeItem('blogValues');
-      localStorage.removeItem('selectedPhoto');
-      localStorage.removeItem('selectedPhotoFilename');
-      this.selectedPhoto = null;
+      this.clearFormAndStorage();
+    });
+  }
 
-      // Reset form values.
-      this.blogForm.reset();
+  clearFormAndStorage(){
+    this.selectedPhoto = null;
+    localStorage.removeItem('blogValues');
+    localStorage.removeItem('selectedPhoto');
+    localStorage.removeItem('selectedPhotoFilename');
+
+    Object.keys(this.blogForm.controls).forEach(key => {
+      const control = this.blogForm.get(key);
+
+      if (control instanceof FormArray) {
+        // Reset each control in the FormArray
+        control.clear();
+      } else {
+        // For regular controls
+        control?.setValue(null);
+        control?.setErrors(null);
+        control?.markAsPristine();
+        control?.markAsUntouched();
+
+        if(key !== 'email'){
+          control?.setErrors({ 'pending': true });
+        }
+      }
     });
   }
 
@@ -339,7 +358,7 @@ export class CreateBlogComponent implements OnInit {
 
     this.blogForm.patchValue(savedValues);
 
-    if(savedValues){
+    if(savedValues && !savedValues.categories.includes(null)){
       savedValues.categories.map((category: Category) => {
         const control = new FormControl(category);
 
