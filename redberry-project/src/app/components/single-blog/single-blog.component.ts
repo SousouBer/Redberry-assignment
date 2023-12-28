@@ -20,6 +20,9 @@ export class SingleBlogComponent implements OnInit {
   //  Subject for holding all blogs in one place.
   allBlogs$!: Observable<Blog[]>;
 
+  // Show loading spinner.
+  isLoading!: Observable<boolean>;
+
   // // Subject that holds all categories from the service.
   // categories$!: Observable<Category[]>;
 
@@ -39,6 +42,10 @@ export class SingleBlogComponent implements OnInit {
     });
 
     this.allBlogs$ = this.blogsService.getBlogs();
+
+    this.isLoading = this.blogsService.returnLoadingValue();
+
+    this.blogItem.subscribe(val => console.log(val));
 
     combineLatest([this.allBlogs$, this.blogItem]).pipe(
       map(([blogs, currentBlog]) => {

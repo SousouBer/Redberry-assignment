@@ -22,6 +22,7 @@ export class BlogItemComponent implements OnInit {
   }
 
   viewFullPage(){
+    this.blogsService.pageIsLoading.next(true);
     const blogID = this.blogItem.id;
     this.router.navigate(['/blogs', blogID]);
   }

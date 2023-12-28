@@ -288,6 +288,7 @@ export class CreateBlogComponent implements OnInit {
       'ღ',
       'ყ',
       'შ',
+      'ჩ',
       'ც',
       'ძ',
       'წ',

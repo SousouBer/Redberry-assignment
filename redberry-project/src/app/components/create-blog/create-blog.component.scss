@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   margin-right: 10rem;
-  // background-color: #FBFAFF;
 }
 
 .section-heading {
@@ -35,7 +34,8 @@
 }
 
 .blog-section-container {
-  width: 60rem;
+  // width: 60rem;
+  width: 45%;
   padding-top: 0.5rem;
 }
 
@@ -82,11 +82,6 @@
   gap: 1.5rem;
 }
 
-// .logo-title-container .logo-container {
-//   width: 2.4rem;
-//   height: 2.4rem;
-// }
-
 .uploaded-logo-container {
   width: 2.4rem;
   height: 2.4rem;
@@ -115,6 +110,7 @@
   justify-content: space-between;
   margin: 2rem 0;
   margin-top: 2.5rem;
+  gap: 2rem;
 }
 
 // .author-title-container {
@@ -165,6 +161,7 @@ input:focus,
   display: flex;
   justify-content: center;
   flex-direction: column;
+  flex: 1;
 }
 
 .title-input {
@@ -385,6 +382,7 @@ textarea.ng-valid {
   font-weight: 500;
   color: #fff;
   border-radius: 8px;
+  width: 50%;
 }
 
 .submit-btn:disabled {
@@ -425,8 +423,6 @@ textarea.ng-valid {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 6.4rem;
-  height: 6.4rem;
 }
 
 .logo-container img {
@@ -492,7 +488,8 @@ textarea.ng-valid {
 .file-upload-error {
   margin-top: 0.5rem;
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: 700;
+  font-family: inherit;
 }
 
 .back-btn {

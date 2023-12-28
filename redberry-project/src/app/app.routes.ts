@@ -1,7 +1,11 @@
 import { Routes } from "@angular/router";
+import { AuthGuard } from "./services/auth.guard";
 
 // Lazy load all components.
 export const routes: Routes = [
+  {
+    path: '', redirectTo: 'blogs', pathMatch: 'full'
+  },
   {
     path: 'blogs',
     loadComponent: () =>
@@ -9,6 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'create-blog',
+    canActivate: [AuthGuard],
     loadComponent: () =>
       import('./components/create-blog/create-blog.component').then(mod => mod.CreateBlogComponent)
   },

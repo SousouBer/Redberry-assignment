@@ -17,6 +17,9 @@ export class BlogsService {
     '220fa65a71c56733beee5e3cdcf15b02a95bb6e0a4b61f4deb5030ec898204d2';
   private APIurl = 'https://api.blog.redberryinternship.ge/api';
 
+  // Show spinner in single page.
+  pageIsLoading = new BehaviorSubject<boolean>(true);
+
   // Authenticated successfully to show success modal window.
   authenticated$ = new Subject<boolean>();
 
@@ -38,6 +41,10 @@ export class BlogsService {
 
   returnSelectedCategories(): Observable<Category[]> {
     return this.selectedCategories$;
+  }
+
+  returnLoadingValue(): Observable<boolean> {
+    return this.pageIsLoading;
   }
 
   // Subject that hold the data of the blogs;
@@ -104,6 +111,7 @@ export class BlogsService {
   // Get details for a single blog.
   loadSingleBlog(id: number){
     this.http.get(`${this.APIurl}/blogs/${id}`).subscribe(blog => {
+      this.pageIsLoading.next(false);
       this.singleBlog$.next(blog as Blog);
     });
   }

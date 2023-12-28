@@ -1,3 +1,6 @@
+<div *ngIf="isLoading | async" class="spinner-container">
+  <app-spinner></app-spinner>
+</div>
 <section class="blog-info-section">
   <button class="back-main-page">
     <img [src]="'assets/imgs/arrow-back-main.png'" alt="Back arrow photo" (click)="backToMainPage()">
@@ -40,7 +43,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!similarBlogs.length" class="no-similar-blogs">
+  <div *ngIf="!similarBlogs.length && !(isLoading | async)" class="no-similar-blogs">
     <p class="no-blogs-message">არჩეულ ბლოგს მსგავსი სტატიები არ გააჩნია.</p>
   </div>
   <div *ngIf="similarBlogs.length" class="similar-blogs-section">
