@@ -15,13 +15,15 @@ import { BlogsService } from './services/blogs.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'redberry-project';
-
   constructor(private blogsService: BlogsService){}
 
   ngOnInit(): void {
     if(<string>localStorage.getItem('authenticatedUser')){
       this.blogsService.isLoggedIn.next(true);
     }
+
+    // Load all blogs and categories once when the app runs.
+    this.blogsService.init();
+    this.blogsService.loadBlogs();
   }
 }

@@ -21,4 +21,5 @@ export interface Blog {
   publish_date: string;
   categories: Category[];
   author: string;
+  email?: string;
 }

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Blog } from 'src/app/models/models.interface';
 import { ShortenPipe } from 'src/app/pipes/shorten-text.pipe';
+import { Router } from '@angular/router';
+import { BlogsService } from 'src/app/services/blogs.service';
 
 
 @Component({
@@ -14,9 +16,13 @@ import { ShortenPipe } from 'src/app/pipes/shorten-text.pipe';
 export class BlogItemComponent implements OnInit {
   @Input() blogItem!: Blog;
 
-  constructor() { }
+  constructor(private router: Router, private blogsService: BlogsService) { }
 
   ngOnInit(): void {
   }
 
+  viewFullPage(){
+    const blogID = this.blogItem.id;
+    this.router.navigate(['/blogs', blogID]);
+  }
 }

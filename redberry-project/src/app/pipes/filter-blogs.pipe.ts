@@ -7,7 +7,7 @@ import { Blog, Category } from "../models/models.interface";
 })
 export class FilterBlogs implements PipeTransform {
   transform(value: Blog[] | null, categories: number[] | null) {
-    if(value?.length === 0){
+    if(value?.length === 0 || categories?.length === 0){
       return value;
     }
 

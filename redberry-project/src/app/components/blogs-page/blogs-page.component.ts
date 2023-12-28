@@ -21,7 +21,6 @@ export class BlogsPageComponent implements OnInit {
   categories$!: Observable<Category[]>;
 
   // This array is used to filter the output.
-  // chosenCategories: number[] = [14, 5];
   chosenCategoriesSubject$ = new BehaviorSubject<number[]>([]);
   chosenCategories: number[] = [];
 
@@ -33,9 +32,6 @@ export class BlogsPageComponent implements OnInit {
 
     // Get categories from the service and use Observable above to hold values.
     this.categories$ = this.blogsService.getCategories();
-
-    this.blogsService.init();
-    this.blogsService.loadBlogs();
 
     // this.createdBlogs$.subscribe((val) => console.log(val));
     this.chosenCategoriesSubject$.subscribe(value => this.chosenCategories = value);

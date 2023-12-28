@@ -1,28 +1,28 @@
 <section class="blog-info-section">
   <button class="back-main-page">
-    <img [src]="'assets/imgs/arrow-back-main.png'" alt="Back arrow photo">
+    <img [src]="'assets/imgs/arrow-back-main.png'" alt="Back arrow photo" (click)="backToMainPage()">
   </button>
   <div class="item-container">
     <div class="item">
       <div class="img-container">
-        <img [src]="'assets/imgs/test-big-photo.png'" alt="Blog Image" />
+        <img [src]="(blogItem | async)?.image" alt="Blog Image" />
       </div>
       <div class="blog-details">
         <div class="blog-author-date">
-          <span class="blog-author">ლილე კვარაცხელია</span>
+          <span class="blog-author">{{ (blogItem | async)?.author }}</span>
           <div class="date-email-container">
-            <span class="blog-date">11/10/2023</span>
-            <span class="blog-email">lile.kvaratskhelia@redberry.ge</span>
+            <span class="blog-date">{{ (blogItem | async)?.publish_date}}</span>
+            <span class="blog-email">{{ (blogItem | async)?.email }}</span>
           </div>
         </div>
         <p class="blog-title">
-          მობილური ფოტოგრაფიის კონკურსის გამარჯვებულთა ვინაობა ცნობილია
+          {{ (blogItem | async)?.title}}
         </p>
         <div class="blog-categories">
           <!-- <ng-container *ngFor="let category of blogItem.categories">
           <div class="category-btn" [ngStyle]="{ 'color': category.text_color, 'background-color': category.background_color}">{{ category.title }}</div>
         </ng-container> -->
-          <ng-container *ngFor="let category of categories$ | async">
+          <ng-container *ngFor="let category of (blogItem | async)?.categories">
             <div
               class="category-btn"
               [ngStyle]="{
@@ -35,26 +35,7 @@
           </ng-container>
         </div>
         <p class="blog-description">
-          6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური
-          სიზუსტისთვის, ეს პროცესი ორჯერ გაიმეორეს და ორივეჯერ იმ ყველს მიენიჭა
-          უპირატესობა, რომელსაც ჰიპ-ჰოპს ასმენინებდნენ. „მუსიკალური ენერგია
-          პირდაპირ ყველის შუაგულში რეზონირებდა“, — აღნიშნა ბერნის ხელოვნების
-          უნივერსიტეტის წარმომადგენელმა, მაიკლ ჰერენბერგმა. რა თქმა უნდა, ეს
-          ერთი კვლევა საკმარისი არ არის საბოლოო დასკვნების გამოსატანად.
-          სანაცვლოდ, მეცნიერებს სურთ, უშუალოდ ჰიპ-ჰოპის ჟანრის სხვადასხვა მუსიკა
-          მოასმენინონ რამდენიმე ყველს და უკვე ისინი შეაჯიბრონ ერთმანეთს. აქვე
-          საგულისხმოა, რომ როგორც ბერნის მეცნიერები განმარტავენ, ექსპერიმენტს
-          საფუძვლად არა ყველის გაუმჯობესებული წარმოება, არამედ კულტურული
-          საკითხები დაედო. მათი თქმით, ადამიანებს უყვართ ყველი და მუსიკა,
-          ამიტომაც საინტერესოა ამ ორის კავშირის დანახვა. 6 თვის შემდეგ ყველის
-          ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი
-          ორჯერ გაიმეორეს და ორივეჯერ იმ ყველს მიენიჭა უპირატესობა, რომელსაც
-          ჰიპ-ჰოპს ასმენინებდნენ. „მუსიკალური ენერგია პირდაპირ ყველის შუაგულში
-          რეზონირებდა“, — აღნიშნა ბერნის ხელოვნების უნივერსიტეტის
-          წარმომადგენელმა, მაიკლ ჰერენბერგმა. რა თქმა უნდა, ეს ერთი კვლევა
-          საკმარისი არ არის საბოლოო დასკვნების გამოსატანად. სანაცვლოდ,
-          მეცნიერებს სურთ, უშუალოდ ჰიპ-ჰოპის ჟანრის სხვადასხვა მუსიკა
-          მოასმენინონ რამდენიმე ყველს და უკვე ისინი შეაჯიბრონ ერთმანეთს.
+          {{ (blogItem | async)?.description }}
         </p>
       </div>
     </div>

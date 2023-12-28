@@ -12,4 +12,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/create-blog/create-blog.component').then(mod => mod.CreateBlogComponent)
   },
+  {
+    path: 'blogs/:id',
+    loadComponent: () => import('./components/single-blog/single-blog.component').then(mod => mod.SingleBlogComponent)
+  }
 ];

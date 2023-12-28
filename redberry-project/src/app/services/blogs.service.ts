@@ -33,6 +33,9 @@ export class BlogsService {
   // Subject for holding selected categories in the blog page.
   selectedCategories$ = new BehaviorSubject<Category[]>([]);
 
+  // Single blog subject.
+  singleBlog$ = new Subject<Blog>();
+
   returnSelectedCategories(): Observable<Category[]> {
     return this.selectedCategories$;
   }
@@ -93,5 +96,16 @@ export class BlogsService {
   // Create a blog
   createBlog(data: FormData) {
     return this.http.post(`${this.APIurl}/blogs`, data);
+  }
+
+  // Get details for a single blog.
+  loadSingleBlog(id: number){
+    this.http.get(`${this.APIurl}/blogs/${id}`).subscribe(blog => {
+      this.singleBlog$.next(blog as Blog);
+    });
+  }
+
+  getSingleBlog(): Observable<Blog> {
+    return this.singleBlog$;
   }
 }
