@@ -5,11 +5,12 @@ import { BlogsService } from 'src/app/services/blogs.service';
 import { BehaviorSubject, Observable, combineLatest, map, take } from 'rxjs';
 import { BlogItemComponent } from '../blog-item/blog-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-single-blog',
   standalone: true,
-  imports: [CommonModule, BlogItemComponent],
+  imports: [CommonModule, BlogItemComponent, SpinnerComponent],
   templateUrl: './single-blog.component.html',
   styleUrls: ['./single-blog.component.scss'],
 })

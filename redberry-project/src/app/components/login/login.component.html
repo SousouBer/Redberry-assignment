@@ -16,7 +16,7 @@
       <span class="err-message">ელ-ფოსტა არ მოიძებნა</span>
     </div>
   </div>
-  <button *ngIf="!isLoading" class="login-btn" type="submit">შესვლა</button>
+  <button *ngIf="!isLoading" [disabled]="loginForm.invalid" class="login-btn" type="submit">შესვლა</button>
   <div *ngIf="isLoading" class="spinner-container">
     <app-spinner></app-spinner>
   </div>

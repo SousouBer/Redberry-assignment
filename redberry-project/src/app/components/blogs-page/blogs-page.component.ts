@@ -27,6 +27,9 @@ export class BlogsPageComponent implements OnInit {
   constructor(private blogsService: BlogsService) {}
 
   ngOnInit(): void {
+    this.blogsService.init();
+    this.blogsService.loadBlogs();
+
     // Get blogs from the service and use Observable above to hold values.
     this.createdBlogs$ = this.blogsService.getBlogs();
 

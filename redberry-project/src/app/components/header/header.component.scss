@@ -1,9 +1,12 @@
 .header {
   background-color: #ffffff;
+  border-bottom: 1px solid #E4E3EB;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 2rem 8rem;
+  // position: fixed;
+  width: 100%;
 }
 
 .logo-container {
@@ -49,4 +52,8 @@
 
 .centre-redberry-logo {
   justify-content: center;
+}
+
+.login, .login-success {
+  width: 33.33%
 }

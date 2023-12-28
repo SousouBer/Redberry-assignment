@@ -72,7 +72,10 @@ export class BlogsService {
     this.http
       .get<BlogsData>(`${this.APIurl}/blogs`)
       .pipe(map((data) => data.data))
-      .subscribe((blogs) => this.blogs$.next(blogs));
+      .subscribe((blogs) => {
+        const onlyOlderBlogs = blogs.filter(blog => new Date(blog.publish_date) < new Date());
+        this.blogs$.next(onlyOlderBlogs);
+      });
   }
 
   public getBlogs(): Observable<Blog[]> {

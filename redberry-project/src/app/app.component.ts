@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     }
 
     // Load all blogs and categories once when the app runs.
-    this.blogsService.init();
-    this.blogsService.loadBlogs();
+    // this.blogsService.init();
+    // this.blogsService.loadBlogs();
   }
 }

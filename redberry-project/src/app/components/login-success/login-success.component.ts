@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogsService } from 'src/app/services/blogs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-success',
@@ -11,12 +12,13 @@ import { BlogsService } from 'src/app/services/blogs.service';
 })
 export class LoginSuccessComponent implements OnInit {
 
-  constructor(private blogsService: BlogsService) { }
+  constructor(private blogsService: BlogsService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   hideModal(){
     this.blogsService.showModal$.next(false);
+    this.router.navigate(['/blogs']);
   }
 }

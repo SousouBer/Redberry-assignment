@@ -19,7 +19,6 @@
 .login-form {
   background-color: #fff;
   padding: 3rem 3rem 4rem 3rem;
-  width: 48rem;
   border-radius: 13px;
 }
 
@@ -33,7 +32,7 @@
 }
 
 .email {
-  font-size: 2rem;
+  font-size: 1.4rem;
   padding: 1.8rem;
   background-color: #F7F7FF;
   border-radius: 12px;
@@ -56,6 +55,7 @@
   padding: 1rem 2rem;
   border-radius: 8px;
   cursor: pointer;
+  font-family: inherit;
 }
 
 input.ng-invalid.ng-touched {

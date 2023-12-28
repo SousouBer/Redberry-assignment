@@ -144,7 +144,7 @@ export class CreateBlogComponent implements OnInit {
     const formData = new FormData();
 
     const categoriesID = this.categories.value.map((category: Category) => category.id);
-    console.log(categoriesID);
+    console.log(this.blogForm.value);
 
     formData.append('title', this.title?.value);
     formData.append('description', this.description?.value);
@@ -156,9 +156,9 @@ export class CreateBlogComponent implements OnInit {
       JSON.stringify(categoriesID)
     );
      // Send email control only if the value is not null.
-     formData.append('email', this.email?.value);
-    //  if(this.email?.value !== null) {
-    // }
+     if(this.email?.value === null || this.email?.value === '') {
+       formData.append('email', '');
+    }
 
     this.blogsService.createBlog(formData).subscribe((res) => {
       console.log(res);

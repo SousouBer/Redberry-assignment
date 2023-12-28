@@ -1,6 +1,6 @@
 <div *ngIf="showOrHideModal$ | async" class="login-form-container">
-  <app-login *ngIf="!(authenticated$ | async)"></app-login>
-  <app-login-success *ngIf="authenticated$ | async"></app-login-success>
+  <app-login class="login" *ngIf="!(authenticated$ | async)"></app-login>
+  <app-login-success *ngIf="authenticated$ | async" class="login-success"></app-login-success>
 </div>
 <header class="header" [class.centre-redberry-logo]="hideButtons">
   <div class="logo-container" routerLink="/blogs">
