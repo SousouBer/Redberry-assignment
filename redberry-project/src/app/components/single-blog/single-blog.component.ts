@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Blog, Category } from 'src/app/models/models.interface';
 import { BlogsService } from 'src/app/services/blogs.service';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map, take } from 'rxjs';
 import { BlogItemComponent } from '../blog-item/blog-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,18 +14,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./single-blog.component.scss'],
 })
 export class SingleBlogComponent implements OnInit {
-  // @Input() blogItem!: Blog;
   blogItem!: Observable<Blog>;
 
   //  Subject for holding all blogs in one place.
   allBlogs$!: Observable<Blog[]>;
 
-  // Subject that holds all categories from the service.
-  categories$!: Observable<Category[]>;
+  // // Subject that holds all categories from the service.
+  // categories$!: Observable<Category[]>;
 
-  // Subject to hold blogs that have similar categories.
-  // similarBlogs$!: Observable<Blog[]>;
-  similarBlogs$ = new BehaviorSubject<Blog[]>([]);
+  // Value used in carousel functionality.
+  currentIndex = 0;
+
+  similarBlogs: Blog[] = [];
+
   constructor(private blogsService: BlogsService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -35,31 +36,45 @@ export class SingleBlogComponent implements OnInit {
       this.blogsService.loadSingleBlog(id);
       this.blogItem = this.blogsService.getSingleBlog();
     });
-    // this.blogItem = this.blogsService.getSingleBlog();
-    // this.blogItem.subscribe(data => console.log('data', data))
-    // this.categories$ = this.blogsService.getCategories();
+
     this.allBlogs$ = this.blogsService.getBlogs();
 
-    // Take only those blogs that contain at least one same category.
-    this.allBlogs$.pipe(take(1)).subscribe((blogs) => {
-      const similarBlogs = blogs.filter((blog) =>
-        this.blogItem.categories.some((category) =>
-          blog.categories.includes(category)
-        )
-      );
+    combineLatest([this.allBlogs$, this.blogItem]).pipe(
+      map(([blogs, currentBlog]) => {
+        const similarBlogs = blogs.filter((blog) => {
+          if (blog.id === currentBlog.id) {
+            return false;
+          }
 
-      // const filteredBlogs = value?.filter(blog =>
-      //   blog.categories.some(category => (<number[]>categories).includes(category.id))
-      // );
-
-      this.similarBlogs$.next(similarBlogs);
+          const hasCommonCategory = currentBlog.categories.some((currentCategory) =>
+            blog.categories.some((blogCategory) => currentCategory.id === blogCategory.id)
+          );
+          return hasCommonCategory;
+        });
+        return similarBlogs;
+      })
+    ).subscribe((similarBlogs) => {
+      this.similarBlogs = similarBlogs;
     });
-
-    // this.blogsService.init();
-    // this.blogsService.loadBlogs();
   }
 
   backToMainPage(){
     this.router.navigate(['/blogs']);
+  }
+
+  get visibleItems(): Blog[] {
+    return this.similarBlogs.slice(this.currentIndex, this.currentIndex + 3);
+  }
+
+  get isBackDisabled(): boolean {
+    return this.currentIndex === 0;
+  }
+
+  get isFrontDisabled(): boolean {
+    return this.currentIndex >= this.similarBlogs.length - 3;
+  }
+
+  navigate(offset: number): void {
+    this.currentIndex += offset;
   }
 }

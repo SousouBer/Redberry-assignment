@@ -40,24 +40,23 @@
       </div>
     </div>
   </div>
-  <div class="similar-blogs-section">
+  <div *ngIf="!similarBlogs.length" class="no-similar-blogs">
+    <p class="no-blogs-message">არჩეულ ბლოგს მსგავსი სტატიები არ გააჩნია.</p>
+  </div>
+  <div *ngIf="similarBlogs.length" class="similar-blogs-section">
     <div class="title-btns-container">
       <h3>მსგავსი სტატიები</h3>
       <div class="btns-container">
-        <button></button>
-        <button>
-          <img [src]="'assets/imgs/arrow-front.png'" alt="Arror photo">
+        <button class="carousel-btn" [disabled]="isBackDisabled" (click)="navigate(-3)">
+          <img [src]="'assets/imgs/arr-back.png'" alt="Arrow icon">
+        </button>
+        <button class="carousel-btn" [disabled]="isFrontDisabled" (click)="navigate(3)">
+          <img [src]="'assets/imgs/arrow-front.png'" alt="Arror icon">
         </button>
       </div>
     </div>
     <div class="blogs-container">
-      <ng-container *ngFor="let blog of allBlogs$ | async">
-        <app-blog-item [blogItem]="blog"></app-blog-item>
-      </ng-container>
-      <ng-container *ngFor="let blog of allBlogs$ | async">
-        <app-blog-item [blogItem]="blog"></app-blog-item>
-      </ng-container>
-      <ng-container *ngFor="let blog of allBlogs$ | async">
+      <ng-container *ngFor="let blog of visibleItems">
         <app-blog-item [blogItem]="blog"></app-blog-item>
       </ng-container>
     </div>
