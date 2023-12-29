@@ -21,9 +21,5 @@ export class AppComponent implements OnInit {
     if(<string>localStorage.getItem('authenticatedUser')){
       this.blogsService.isLoggedIn.next(true);
     }
-
-    // Load all blogs and categories once when the app runs.
-    // this.blogsService.init();
-    // this.blogsService.loadBlogs();
   }
 }

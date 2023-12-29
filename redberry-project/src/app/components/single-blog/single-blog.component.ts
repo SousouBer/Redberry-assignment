@@ -41,6 +41,9 @@ export class SingleBlogComponent implements OnInit {
       this.blogItem = this.blogsService.getSingleBlog();
     });
 
+    this.blogsService.init();
+    this.blogsService.loadBlogs();
+
     this.allBlogs$ = this.blogsService.getBlogs();
 
     this.isLoading = this.blogsService.returnLoadingValue();

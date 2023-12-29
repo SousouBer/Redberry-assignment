@@ -60,6 +60,7 @@ export class CreateBlogComponent implements OnInit {
     this.selectedCategories$ = this.blogsService.returnSelectedCategories();
 
     this.blogsService.init();
+    this.blogsService.loadBlogs();
 
     this.blogForm = new FormGroup({
       title: new FormControl(null, [
